@@ -1,0 +1,1203 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Interactive STM Annotated Coder — IndexedDB Only (v4)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root { --topbar-h:64px; --leftcol-w:420px; --sidebar-w:60px; }
+    body { font-family: 'Roboto', "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; margin:0; background:#f8fafc; color:#222; height:100vh; overflow:hidden; }
+    .topbar { height:var(--topbar-h); display:flex; align-items:center; gap:12px; padding:10px 14px; border-bottom:1px solid #eee; background:#fff; box-sizing:border-box; box-shadow:0 2px 8px rgba(43,108,176,0.05); }
+    .brand { font-size:22px; font-weight:700; letter-spacing:0.5px; color:#2b6cb0; }
+    .controls { margin-left:auto; display:flex; gap:8px; align-items:center; }
+      .menu-dropdown { position:relative; }
+      .menu-btn { background:none; border:none; font-size:22px; color:#2563eb; cursor:pointer; padding:6px 12px; border-radius:4px; }
+      .menu-content { display:none; position:absolute; right:0; top:110%; background:#fff; border:1px solid #ccc; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.10); z-index:1001; min-width:180px; }
+      .menu-content .btn { width:100%; margin:4px 0; min-width:0; font-size:14px; justify-content:left; }
+      .menu-content .btn i { margin-right:8px; }
+      .menu-dropdown.open .menu-content { display:block; }
+      @media (max-width: 1000px) {
+        .controls, .d-flex.align-items-center.gap-2 > button:not(.menu-btn) { display:none !important; }
+        .menu-btn { display:inline-block; }
+      }
+    .btn {
+      padding: 4px 12px;
+      border-radius: 4px;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      box-shadow: 0 1px 4px rgba(43,108,176,0.06);
+      transition: background 0.18s, box-shadow 0.18s;
+      margin-right: 8px;
+      min-width: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn:last-child { margin-right: 0; }
+    .btn.ghost {
+      background: #f3f6fa;
+      color: #2563eb;
+      border: 1px solid #2563eb;
+    }
+    .btn.ghost:hover, .btn.ghost:focus {
+      background: #e0e7ff;
+      box-shadow: 0 2px 8px rgba(43,108,176,0.10);
+    }
+    .btn.secondary { background: #6b7280; }
+    .btn i { margin-right: 5px; font-size: 16px; }
+    .topbar .btn {
+      font-size: 13px;
+      padding: 4px 10px;
+      min-width: 80px;
+      border-radius: 3px;
+      box-shadow: none;
+    }
+    .controls { gap: 0; }
+    @media (max-width: 1000px) {
+      .topbar .btn { min-width: 60px; font-size: 12px; }
+    }
+    .small { font-size:13px; color:#555; }
+    .file-info { font-size:14px; color:#333; margin-left:12px; min-width:260px; }
+    .notif { position:fixed; right:18px; top:80px; background:#e6ffed; border:1px solid #b7f0c9; padding:10px 12px; border-radius:6px; display:none; z-index:9999; box-shadow:0 6px 18px rgba(0,0,0,0.08); font-size:15px; }
+    .notif.error { background:#ffe6e6; border:1px solid #f0b7b7; }
+    .restore-prompt { position:fixed; left:50%; top:40%; transform:translate(-50%,-50%); background:#fff; border:1px solid #ddd; padding:18px; border-radius:10px; box-shadow:0 8px 30px rgba(0,0,0,0.12); z-index:99999; display:none; width:420px; }
+    .restore-prompt h4{ margin:0 0 8px 0; }
+    .wrap { display:flex; height:calc(100vh - var(--topbar-h)); }
+    .sidebar { width:var(--sidebar-w); border-right:1px solid #eee; padding:8px; overflow:auto; background:#fbfbfb; box-sizing:border-box; }
+    .main-area { display:flex; flex:1; }
+    .leftcol { width:var(--leftcol-w); min-width:260px; border-right:1px solid #eee; box-sizing:border-box; overflow:auto; padding:20px; background:#fff; }
+    .rightcol { flex:1; box-sizing:border-box; overflow:auto; padding:24px; background:#f4f6fb; }
+    .guide { margin: 8px 0 12px 0; font-size:14px; line-height:1.6; background:#f8f8f8; padding:12px; border:1px solid #ddd; border-radius:8px; }
+  .guide h3 { margin:0 0 6px 0; font-size:16px; }
+    .legend-panel { background:#fff; border:1px solid #eee; padding:12px; border-radius:8px; margin-bottom:14px; box-shadow:0 2px 8px rgba(43,108,176,0.04); }
+    .legend-panel h3 { margin:0 0 6px 0; font-size:16px; }
+    .legend-panel { word-break:break-word; overflow-wrap:break-word; }
+    .topic-header { background:#fff; border:1px solid #eee; padding:16px; border-radius:8px; margin-bottom:14px; box-shadow:0 2px 8px rgba(43,108,176,0.04); }
+    .topic-title { font-size:22px; font-weight:700; margin-bottom:8px; color:#2b6cb0; }
+    .repdoc { border:1px solid #eee; padding:14px; margin-bottom:14px; border-radius:8px; background:#fff; font-size:16px; box-shadow:0 2px 8px rgba(43,108,176,0.04); }
+    .repdoc .meta { font-size:15px; color:#444; margin-bottom:8px; }
+    .repdoc .doc-html { margin-bottom:10px; white-space:pre-wrap; font-size:15px; }
+    label { display:block; font-size:15px; margin-top:8px; font-weight:700; }
+    input[type="text"], textarea { width:100%; padding:10px; margin-top:8px; border:1px solid #ccc; border-radius:6px; font-family:inherit; font-size:15px; box-sizing:border-box; background:#f8f8f8; }
+    textarea { min-height:80px; }
+    .actions { margin-top:14px; display:flex; gap:10px; align-items:center; }
+    .status { margin-left:auto; font-size:14px; color:#333; }
+    .topic-item { padding:10px; border-radius:6px; margin-bottom:8px; cursor:pointer; font-size:14px; text-align:center; transition:background 0.2s; }
+    .topic-item:hover { background:#e3f0ff; }
+    .topic-item.active { background:#e6f3ff; border-left:4px solid #2b6cb0; padding-left:8px; }
+    .kw-prob { background-color:#cfe6ff; color:#0b4b76; padding:2px 8px; border-radius:4px; font-weight:600; }
+    .kw-frex { background-color:#dbf3df; color:#1f6b2f; padding:2px 8px; border-radius:4px; font-weight:600; }
+    .kw-lift { background-color:#ffd9d9; color:#7a1b1b; padding:2px 8px; border-radius:4px; font-weight:600; }
+    .kw-score { background-color:#fff1da; color:#7a4a06; padding:2px 8px; border-radius:4px; font-weight:600; }
+    .kw-inline { display:inline; margin:0; font-size:13px; background:none; border-radius:0; padding:0; font-weight:600; white-space:normal; }
+    .highlighted { padding:2px 4px; border-radius:4px; display:inline-block; background:#e3f0ff; }
+    @media (max-width:1000px){ .leftcol{ width:320px; } .sidebar{ display:none; } }
+
+    /* Print styles for PDF export (All Codes) */
+    #printArea { display:none; }
+    @media print {
+      @page { size: A4 landscape; margin: 12mm; }
+      html, body { height:auto; overflow:visible; background:#fff !important; }
+      body * { visibility: hidden; }
+      #printArea, #printArea * { visibility: visible; }
+      #printArea { display:block !important; position:static !important; inset: auto !important; }
+      /* Hide app chrome */
+      .topbar, .sidebar, .leftcol, .rightcol, .wrap, #allCodesModal, .restore-prompt { display:none !important; }
+      /* Table readability */
+      #printArea .print-title { font-size:16px; font-weight:700; margin-bottom:6px; }
+      #printArea .print-meta { font-size:11px; color:#444; margin-bottom:10px; }
+      #printArea table { width:100%; border-collapse:collapse; font-size:11px; table-layout:fixed; }
+      #printArea th, #printArea td { border:1px solid #e5e7eb; padding:6px 8px; vertical-align:top; }
+      #printArea thead th { background:#f3f4f6; font-weight:700; }
+      #printArea .col-topic { width:8%; }
+      #printArea .col-sub { width:16%; }
+      #printArea .col-final { width:16%; }
+      #printArea .col-memo { width:26%; }
+      #printArea .col-rep { width:34%; }
+      #printArea .snip { margin-bottom:4px; }
+      #printArea .snip-idx { color:#6b7280; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand" id="brandTitle">Interactive STM Annotated Coder — IndexedDB Only (v4)</div>
+    <div class="file-info" id="fileInfo">No file/project loaded</div>
+    <div class="d-flex align-items-center gap-2" style="margin-left:18px;">
+      <button id="showProjectInfo" class="btn btn-sm btn-outline-primary" title="View info about the loaded dataset and your coding progress"><i class="fa fa-info-circle"></i> Project Info</button>
+      <button id="showAllCodes" class="btn btn-sm btn-outline-primary" title="View all topics with Sub-Theme, Final Theme and Memos for qualitative comparison"><i class="fa fa-table"></i> All Codes</button>
+      <button id="showHelpModal" class="btn btn-sm btn-outline-secondary" title="Click for instructions and tips on using the STM Coder"><i class="fa fa-question-circle"></i> Help / Guide</button>
+      <div class="controls d-flex align-items-center gap-2">
+        <div style="position:relative; display:inline-block;">
+          <button class="btn btn-sm btn-outline-primary" id="btn-import-data" title="Import your data as HTML or JSON"><i class="fa fa-upload"></i> Import Data ▼</button>
+          <div id="importDropdown" style="display:none; position:absolute; left:0; top:110%; background:#fff; border:1px solid #ccc; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,0.08); z-index:1000; min-width:160px;">
+            <button class="btn btn-sm btn-outline-primary" id="btn-upload-html" style="width:100%; border:none; border-radius:0; box-shadow:none;" title="Upload an annotated HTML file to start coding topics">Upload HTML</button>
+            <input type="file" id="htmlfile" accept=".html,.htm" style="display:none" />
+            <button class="btn btn-sm btn-outline-primary" id="btn-import-json" style="width:100%; border:none; border-radius:0; box-shadow:none;" title="Import a previously saved JSON project">Import JSON</button>
+            <input type="file" id="importFile" accept=".json" style="display:none" />
+          </div>
+        </div>
+        <button class="btn btn-sm btn-success" id="btn-save" title="Manually save your work to the database"><i class="fa fa-save"></i> Save</button>
+        <button class="btn btn-sm btn-outline-info" id="btn-export-json" title="Export your coded topics and work as a JSON file"><i class="fa fa-download"></i> Export JSON</button>
+        <button class="btn btn-sm btn-outline-danger" id="btn-clear-db" title="Clear the temporary database and reset your session"><i class="fa fa-trash"></i> Clear Temp DB</button>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notif" id="notifBox" role="status"></div>
+  <!-- Project Info Modal -->
+  <div id="projectInfoModal" style="display:none; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); background:#fff; border:1px solid #ddd; border-radius:8px; box-shadow:0 8px 30px rgba(0,0,0,0.12); z-index:99999; width:420px; max-width:90vw; padding:22px;">
+    <h3 style="margin-top:0;">Project Information</h3>
+    <div id="projectInfoContent" style="font-size:14px;"></div>
+    <p style="font-size:13px; margin-top:12px;">Progress is autosaved. When you reopen the app, your last session will be restored automatically.</p>
+    <button id="closeProjectInfo" class="btn ghost" style="margin-top:12px; float:right;">Close</button>
+  </div>
+  
+  <!-- Help Modal -->
+  <div id="helpModal" style="display:none; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); background:#fff; border:1px solid #ddd; border-radius:8px; box-shadow:0 8px 30px rgba(0,0,0,0.12); z-index:99999; width:420px; max-width:90vw; padding:22px;">
+    <h3 style="margin-top:0;">How to Use This Tool</h3>
+    <ul style="font-size:14px;">
+      <li><strong>Import Data:</strong> Upload your annotated HTML file to begin coding topics.</li>
+      <li><strong>Review Topics:</strong> Select a topic from the sidebar to view its representative documents and keywords.</li>
+      <li><strong>Code Documents:</strong> Enter your initial descriptive code for each representative document in the right pane.</li>
+      <li><strong>Label Themes:</strong> Use the Sub-Theme and Final Theme fields to assign labels to each topic.</li>
+      <li><strong>All Codes View:</strong> Use the All Codes button to view and filter a table of all topics with Sub-Theme, Final Theme, and Memos; click a row to jump to that topic.</li>
+      <li><strong>Autosave:</strong> All changes are saved automatically. You can also use the Save button for manual saving.</li>
+      <li><strong>Export/Import:</strong> Export your work as JSON for backup or sharing. Import previously saved projects to continue coding.</li>
+      <li><strong>Legend:</strong> Refer to the legend for keyword feature explanations.</li>
+    </ul>
+    <p style="font-size:13px;">For more help, contact the project maintainer or refer to documentation.</p>
+    <button id="closeHelpModal" class="btn ghost" style="margin-top:12px; float:right;">Close</button>
+  </div>
+
+  <!-- All Codes Modal -->
+  <div id="allCodesModal" style="display:none; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); background:#fff; border:1px solid #ddd; border-radius:8px; box-shadow:0 8px 30px rgba(0,0,0,0.12); z-index:99999; width:900px; max-width:95vw; padding:18px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px;">
+      <h3 style="margin:0;">All Codes Overview</h3>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <input type="text" id="codesFilter" placeholder="Filter by any text…" style="padding:6px 10px; border:1px solid #ccc; border-radius:6px; min-width:240px;">
+        <button id="exportCodesPdf" class="btn ghost" title="Print or save this table as a PDF (landscape)"><i class="fa fa-file-pdf"></i> Export PDF</button>
+        <button id="exportCodesCsv" class="btn ghost" title="Export this table as CSV"><i class="fa fa-file-export"></i> Export CSV</button>
+        <button id="closeAllCodes" class="btn ghost">Close</button>
+      </div>
+    </div>
+    <div id="allCodesContainer" style="max-height:60vh; overflow:auto; border:1px solid #eee; border-radius:8px;">
+      <table id="allCodesTable" style="width:100%; border-collapse:collapse; font-size:14px;">
+        <thead style="position:sticky; top:0; background:#f8fafc;">
+          <tr>
+            <th style="text-align:left; padding:10px; border-bottom:1px solid #e5e7eb; width:80px;">Topic</th>
+            <th style="text-align:left; padding:10px; border-bottom:1px solid #e5e7eb;">Sub-Theme</th>
+            <th style="text-align:left; padding:10px; border-bottom:1px solid #e5e7eb;">Final Theme</th>
+            <th style="text-align:left; padding:10px; border-bottom:1px solid #e5e7eb; width:30%;">Memo</th>
+            <th style="text-align:left; padding:10px; border-bottom:1px solid #e5e7eb; width:40%;">Top 3 RepDocs (snippets)</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="small" style="margin-top:8px; color:#444;">Tip: Click any row to jump to that topic.</div>
+  </div>
+
+  <!-- Print-only container for PDF export -->
+  <div id="printArea"></div>
+
+  <div class="restore-prompt" id="restorePrompt">
+    <h4>Temporary DB found</h4>
+    <p id="restoreInfo">A temporary saved project was found from a previous session. Would you like to restore it?</p>
+    <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:12px;">
+      <button class="btn ghost" id="btn-ignore-db">Ignore</button>
+      <button class="btn" id="btn-restore-db">Restore</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="sidebar" id="sidebar">
+      <div id="topicList" style="margin-top:8px;"></div>
+    </div>
+
+    <div class="main-area">
+      <div class="leftcol">
+        <div class="guide" id="guideBox">
+          <h3>Legend – Keyword Feature Categories</h3>
+          <ul>
+            <li><strong style="color:#0b4b76">Prob (P)</strong>: Words with the highest probability of appearing in this topic. These are the most representative and commonly found terms for the topic.</li>
+            <li><strong style="color:#1f6b2f">FREX (F)</strong>: Words selected for both high frequency and exclusivity to this topic. FREX helps highlight terms that are not only common but also distinctive for the topic.</li>
+            <li><strong style="color:#7a1b1b">Lift (L)</strong>: Words that occur much more often in this topic compared to the rest of the corpus. Lift identifies uniquely frequent terms for the topic.</li>
+            <li><strong style="color:#7a4a06">Score (S)</strong>: Words ranked by an informative score, often based on statistical measures. These terms are considered especially relevant or important for understanding the topic.</li>
+          </ul>
+        </div>
+
+        <div class="legend-panel">
+          <h3>Legend — Current Topic</h3>
+          <div id="legendContent" class="small">(no data yet)</div>
+        </div>
+
+        <div class="topic-header" id="topicHeader">
+          <div class="topic-title" id="topicTitle">No topic</div>
+          <label>Sub-Theme (topic)</label>
+          <input type="text" id="subTheme" />
+          <label>Final Theme (topic)</label>
+          <input type="text" id="finalTheme" />
+          <label style="margin-top:8px;">Memo</label>
+          <textarea id="memo"></textarea>
+          <div style="display:flex; gap:8px; margin-top:12px;">
+            <button class="btn" id="btn-save-topic">Save Topic</button>
+            <button class="btn small" id="prevDoc" style="color:#fff; background:#2b6cb0;">Prev</button>
+            <button class="btn small" id="nextDoc" style="color:#fff; background:#2b6cb0;">Next</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="rightcol">
+        <div id="contentArea">
+          <p class="small">Representative documents will appear here.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <input type="file" id="importFile" accept=".json" style="display:none">
+
+<script>
+// Dropdown logic for Import Data
+document.addEventListener('DOMContentLoaded', function() {
+  var importBtn = document.getElementById('btn-import-data');
+  var dropdown = document.getElementById('importDropdown');
+  var htmlBtn = document.getElementById('btn-upload-html');
+  var htmlInput = document.getElementById('htmlfile');
+  var jsonBtn = document.getElementById('btn-import-json');
+  var jsonInput = document.getElementById('importFile');
+  if (importBtn && dropdown) {
+    importBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    });
+    document.addEventListener('click', function(e) {
+      if (!dropdown.contains(e.target) && e.target !== importBtn) {
+        dropdown.style.display = 'none';
+      }
+    });
+  }
+  // Only open file dialog from main event handler below
+  // Only open file dialog from main event handler below
+});
+// Disable upload/import buttons when a file is loaded
+function setUploadImportState(isLoaded) {
+  var uploadBtn = document.getElementById('btn-upload-html');
+  var importBtn = document.getElementById('btn-import-json');
+  // Only disable if topics exist and length > 0
+  var hasData = window.topics && Array.isArray(window.topics) && window.topics.length > 0;
+  if (isLoaded && hasData) {
+    if (uploadBtn) {
+      uploadBtn.disabled = true;
+      uploadBtn.title = 'Export or clear current DB before uploading a new file.';
+      uploadBtn.style.opacity = '0.6';
+      uploadBtn.style.cursor = 'not-allowed';
+    }
+    if (importBtn) {
+      importBtn.disabled = true;
+      importBtn.title = 'Export or clear current DB before importing a new JSON.';
+      importBtn.style.opacity = '0.6';
+      importBtn.style.cursor = 'not-allowed';
+    }
+  } else {
+    if (uploadBtn) {
+      uploadBtn.disabled = false;
+      uploadBtn.title = 'Upload an annotated HTML file to start coding topics';
+      uploadBtn.style.opacity = '';
+      uploadBtn.style.cursor = '';
+    }
+    if (importBtn) {
+      importBtn.disabled = false;
+      importBtn.title = 'Import a previously saved JSON project';
+      importBtn.style.opacity = '';
+      importBtn.style.cursor = '';
+    }
+  }
+}
+  setUploadImportState(true);
+// Project Info modal logic
+function updateProjectInfoContent() {
+  var fileName = document.getElementById('brandTitle').innerText.split(' — ')[0];
+  var total = (window.topics && Array.isArray(window.topics)) ? window.topics.length : 0;
+  var coded = (window.topics && Array.isArray(window.topics)) ? window.topics.filter(t=> t.FinalTheme && String(t.FinalTheme).trim().length>0).length : 0;
+  var lastSaved = '';
+  if (window.topics && window.topics.length > 0 && window.topics[0].lastSavedAt) {
+    lastSaved = window.topics[0].lastSavedAt;
+  }
+  var html = `<strong>Dataset/File:</strong> ${fileName}<br>` +
+             `<strong>Topics Loaded:</strong> ${total}<br>` +
+             `<strong>Topics Coded:</strong> ${coded}<br>` +
+             `<strong>Last Saved:</strong> ${lastSaved ? lastSaved : 'N/A'}`;
+  document.getElementById('projectInfoContent').innerHTML = html;
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var showBtn = document.getElementById('showProjectInfo');
+  var infoModal = document.getElementById('projectInfoModal');
+  var closeBtn = document.getElementById('closeProjectInfo');
+  if (showBtn && infoModal && closeBtn) {
+    showBtn.addEventListener('click', function() {
+      updateProjectInfoContent();
+      infoModal.style.display = 'block';
+    });
+    closeBtn.addEventListener('click', function() {
+      infoModal.style.display = 'none';
+    });
+    window.addEventListener('click', function(e) {
+      if (e.target === infoModal) {
+        infoModal.style.display = 'none';
+      }
+    });
+  }
+});
+// Help modal logic
+document.addEventListener('DOMContentLoaded', function() {
+  var showBtn = document.getElementById('showHelpModal');
+  var helpModal = document.getElementById('helpModal');
+  var closeBtn = document.getElementById('closeHelpModal');
+  if (showBtn && helpModal && closeBtn) {
+    showBtn.addEventListener('click', function() {
+      helpModal.style.display = 'block';
+    });
+    closeBtn.addEventListener('click', function() {
+      helpModal.style.display = 'none';
+    });
+    // Optional: close modal when clicking outside
+    window.addEventListener('click', function(e) {
+      if (e.target === helpModal) {
+        helpModal.style.display = 'none';
+      }
+    });
+  }
+});
+// All Codes modal logic
+// Note: Enhanced to include a "Top 3 RepDocs (snippets)" column in the table
+// and additional CSV columns (RepDoc1..RepDoc3). Snippets are plain-text,
+// de-HTMLed, and truncated for readability.
+document.addEventListener('DOMContentLoaded', function(){
+  var showBtn = document.getElementById('showAllCodes');
+  var modal = document.getElementById('allCodesModal');
+  var closeBtn = document.getElementById('closeAllCodes');
+  var filterInput = document.getElementById('codesFilter');
+  var exportBtn = document.getElementById('exportCodesCsv');
+  var exportPdfBtn = document.getElementById('exportCodesPdf');
+
+  function buildAllCodesTable(){
+    var tbody = document.querySelector('#allCodesTable tbody');
+    if(!tbody) return;
+    // Build rows
+    var rowsHtml = '';
+    (topics || []).forEach(function(t, idx){
+      var memoText = (t.memo || '').toString();
+      var memoEsc = memoText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      var subEsc = (t.SubTheme || '').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      var finEsc = (t.FinalTheme || '').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      // Build top 3 representative doc snippets
+      // Note: Show FULL available text (no truncation) to capture majority content.
+      function stripAlphaCodes(txt){
+        if(!txt) return '';
+        // remove parentheses that contain only 1-8 letters, e.g., (PFS), (PFLS)
+        return txt.replace(/\([A-Za-z]{1,8}\)/g, '');
+      }
+      // No truncation applied in UI; we keep full plain text.
+      var repdocs = Array.isArray(t.RepDocs) ? t.RepDocs : [];
+      var top3 = repdocs.slice(0,3).map(function(rd, i){
+        var raw = rd && (rd.text || rd.html || '');
+        // strip any markup if html
+        var temp = document.createElement('div');
+        temp.innerHTML = raw || '';
+        var plain = temp.textContent || temp.innerText || '';
+        plain = stripAlphaCodes(plain).replace(/\s+/g,' ').trim();
+        var snip = plain; // display full text in the table
+        // escape HTML for safe insertion
+        snip = snip.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        return '<div style="margin-bottom:4px;"><span style="color:#6b7280;">' + (i+1) + ')</span> ' + snip + '</div>';
+      }).join('');
+      rowsHtml += '<tr class="codes-row" data-idx="'+idx+'" style="cursor:pointer;">'
+        + '<td style="padding:10px; border-bottom:1px solid #f1f5f9; font-weight:600; color:#2563eb;">T'+ (t.TopicID || (idx+1)) +'</td>'
+        + '<td style="padding:10px; border-bottom:1px solid #f1f5f9;">'+ subEsc +'</td>'
+        + '<td style="padding:10px; border-bottom:1px solid #f1f5f9;">'+ finEsc +'</td>'
+        + '<td style="padding:10px; border-bottom:1px solid #f1f5f9; white-space:pre-wrap;">'+ memoEsc +'</td>'
+        + '<td style="padding:10px; border-bottom:1px solid #f1f5f9; white-space:pre-wrap;">'+ (top3 || '') +'</td>'
+        + '</tr>';
+    });
+    tbody.innerHTML = rowsHtml || '<tr><td colspan="5" style="padding:12px; color:#666;">No topics loaded.</td></tr>';
+    // Click to jump
+    Array.from(document.querySelectorAll('#allCodesTable tbody tr.codes-row')).forEach(function(tr){
+      tr.addEventListener('click', function(){
+        var idx = parseInt(this.getAttribute('data-idx'));
+        if(!isNaN(idx)) { selectTopic(idx); modal.style.display = 'none'; }
+      });
+    });
+  }
+
+  function openAllCodes(){
+    buildAllCodesTable();
+    if(filterInput) filterInput.value = '';
+    modal.style.display = 'block';
+  }
+
+  function filterRows(){
+    var q = (filterInput.value || '').toLowerCase().trim();
+    var trs = document.querySelectorAll('#allCodesTable tbody tr.codes-row');
+    trs.forEach(function(tr){
+      if(!q) { tr.style.display = ''; return; }
+      var text = tr.innerText.toLowerCase();
+      tr.style.display = text.indexOf(q) !== -1 ? '' : 'none';
+    });
+  }
+
+  function exportCsv(){
+    var lines = [];
+    lines.push(['TopicID','SubTheme','FinalTheme','Memo','RepDoc1','RepDoc2','RepDoc3'].map(function(h){return '"'+h.replace(/"/g,'""')+'"';}).join(','));
+    (topics || []).forEach(function(t){
+      var repdocs = Array.isArray(t.RepDocs) ? t.RepDocs : [];
+      function cleanText(raw){
+        if(!raw) return '';
+        var temp = document.createElement('div');
+        temp.innerHTML = raw;
+        var plain = (temp.textContent || temp.innerText || '');
+        // remove parentheses containing only letters (feature codes) and normalize whitespace
+        plain = plain.replace(/\([A-Za-z]{1,8}\)/g, '');
+        plain = plain.replace(/\s+/g,' ').trim();
+        // Limit length in CSV to keep file manageable
+        if(plain.length > 300) plain = plain.slice(0,299) + '…';
+        return plain;
+      }
+      var d1 = repdocs[0] ? cleanText(repdocs[0].text || repdocs[0].html) : '';
+      var d2 = repdocs[1] ? cleanText(repdocs[1].text || repdocs[1].html) : '';
+      var d3 = repdocs[2] ? cleanText(repdocs[2].text || repdocs[2].html) : '';
+      var row = [
+        (t.TopicID==null? '': String(t.TopicID)),
+        (t.SubTheme==null? '': String(t.SubTheme)),
+        (t.FinalTheme==null? '': String(t.FinalTheme)),
+        (t.memo==null? '': String(t.memo)),
+        d1,
+        d2,
+        d3
+      ].map(function(v){ return '"'+ v.replace(/"/g,'""').replace(/\r?\n/g,'\n') +'"'; });
+      lines.push(row.join(','));
+    });
+    var blob = new Blob([lines.join('\r\n')], {type:'text/csv;charset=utf-8;'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'all_codes_export.csv';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 0);
+  }
+
+  if(showBtn && modal){
+    showBtn.addEventListener('click', openAllCodes);
+  }
+  if(closeBtn){ closeBtn.addEventListener('click', function(){ modal.style.display = 'none'; }); }
+  if(filterInput){ filterInput.addEventListener('input', filterRows); }
+  if(exportBtn){ exportBtn.addEventListener('click', exportCsv); }
+  if(exportPdfBtn){
+    exportPdfBtn.addEventListener('click', function(){
+      try{
+        // Ensure table is up to date
+        buildAllCodesTable();
+        var printHost = document.getElementById('printArea');
+        if(!printHost) return;
+        // Build a print-friendly snapshot
+        var table = document.getElementById('allCodesTable');
+        var cloned = table ? table.cloneNode(true) : null;
+        var now = new Date();
+        var meta = now.toLocaleString();
+        var printHtml = ''+
+          '<div class="print-title">All Codes Overview</div>'+
+          '<div class="print-meta">Generated: '+ meta +'</div>';
+        if(cloned){
+          // Add class names to control widths in print
+          var ths = cloned.querySelectorAll('thead th');
+          if(ths && ths.length >= 5){
+            ths[0].classList.add('col-topic');
+            ths[1].classList.add('col-sub');
+            ths[2].classList.add('col-final');
+            ths[3].classList.add('col-memo');
+            ths[4].classList.add('col-rep');
+          }
+          printHtml += cloned.outerHTML;
+        } else {
+          printHtml += '<div>No topics loaded.</div>';
+        }
+        printHost.innerHTML = printHtml;
+        // Trigger print dialog
+        window.print();
+        // Clean up after a tick
+        setTimeout(function(){ printHost.innerHTML = ''; }, 200);
+      }catch(e){ console.error(e); alert('Failed to prepare PDF view: ' + (e.message||e)); }
+    });
+  }
+  // Close when clicking outside
+  window.addEventListener('click', function(e){ if(e.target === modal){ modal.style.display = 'none'; } });
+});
+// Collapsible help section logic
+document.addEventListener('DOMContentLoaded', function() {
+  var toggleBtn = document.getElementById('toggleHelp');
+  var helpSection = document.getElementById('helpSection');
+  if (toggleBtn && helpSection) {
+    toggleBtn.addEventListener('click', function() {
+      if (helpSection.style.display === 'none') {
+        helpSection.style.display = 'block';
+        toggleBtn.innerText = 'Hide Help / Guide';
+      } else {
+        helpSection.style.display = 'none';
+        toggleBtn.innerText = 'Show Help / Guide';
+      }
+    });
+  }
+});
+/* v4: IndexedDB-only storage, autosave on any change (inputs, textareas, tagging).
+   - Removes localStorage entirely for project data.
+   - Autosaves (debounced) whenever any relevant input changes.
+   - Save button still triggers immediate DB write.
+   - Restore prompt appears if DB has a saved project.
+*/
+
+const DB_NAME = "stm_temp_db_v1";
+const DB_STORE = "projects";
+const DB_KEY = "temp_project_v4";
+
+let db = null;
+// Separate settings DB to persist preferences (e.g., last export folder)
+const SETTINGS_DB = "stm_settings_db_v1";
+const SETTINGS_STORE = "settings";
+const SETTINGS_KEY_EXPORT_HANDLE = "last_export_handle";
+let settingsDB = null;
+let topics = [];
+let currentIdx = 0;
+let autoSaveTimer = null;
+const AUTO_SAVE_DELAY = 600; // ms debounce
+
+/* ===== IndexedDB helpers ===== */
+function openDB(){
+  return new Promise((resolve,reject)=>{
+    const req = indexedDB.open(DB_NAME, 1);
+    req.onupgradeneeded = function(evt){
+      const idb = evt.target.result;
+      if(!idb.objectStoreNames.contains(DB_STORE)){
+        idb.createObjectStore(DB_STORE);
+      }
+    };
+    req.onsuccess = function(evt){
+      db = evt.target.result;
+      resolve(db);
+    };
+    req.onerror = function(evt){ reject(evt.target.error); };
+  });
+}
+function putToDB(value){
+  return new Promise(async (resolve,reject)=>{
+    try{
+      if(!db) await openDB();
+      const tx = db.transaction(DB_STORE, "readwrite");
+      const store = tx.objectStore(DB_STORE);
+      const req = store.put(value, DB_KEY);
+      req.onsuccess = ()=> resolve(true);
+      req.onerror = (e)=> reject(e.target.error);
+    }catch(e){ reject(e); }
+  });
+}
+function getFromDB(){
+  return new Promise(async (resolve,reject)=>{
+    try{
+      if(!db) await openDB();
+      const tx = db.transaction(DB_STORE, "readonly");
+      const store = tx.objectStore(DB_STORE);
+      const req = store.get(DB_KEY);
+      req.onsuccess = (e)=> resolve(e.target.result);
+      req.onerror = (e)=> reject(e.target.error);
+    }catch(e){ reject(e); }
+  });
+}
+function deleteFromDB(){
+  return new Promise(async (resolve,reject)=>{
+    try{
+      if(!db) await openDB();
+      const tx = db.transaction(DB_STORE, "readwrite");
+      const store = tx.objectStore(DB_STORE);
+      const req = store.delete(DB_KEY);
+      req.onsuccess = ()=> resolve(true);
+      req.onerror = (e)=> reject(e.target.error);
+    }catch(e){ reject(e); }
+  });
+}
+
+// ===== Settings DB helpers =====
+function openSettingsDB(){
+  return new Promise((resolve,reject)=>{
+    try{
+      const req = indexedDB.open(SETTINGS_DB, 1);
+      req.onupgradeneeded = function(evt){
+        const idb = evt.target.result;
+        if(!idb.objectStoreNames.contains(SETTINGS_STORE)){
+          idb.createObjectStore(SETTINGS_STORE);
+        }
+      };
+      req.onsuccess = function(evt){ settingsDB = evt.target.result; resolve(settingsDB); };
+      req.onerror = function(evt){ reject(evt.target.error); };
+    }catch(e){ reject(e); }
+  });
+}
+function settingsPut(key, value){
+  return new Promise(async (resolve,reject)=>{
+    try{
+      if(!settingsDB) await openSettingsDB();
+      const tx = settingsDB.transaction(SETTINGS_STORE, "readwrite");
+      const store = tx.objectStore(SETTINGS_STORE);
+      const req = store.put(value, key);
+      req.onsuccess = ()=> resolve(true);
+      req.onerror = (e)=> reject(e.target.error);
+    }catch(e){ reject(e); }
+  });
+}
+function settingsGet(key){
+  return new Promise(async (resolve,reject)=>{
+    try{
+      if(!settingsDB) await openSettingsDB();
+      const tx = settingsDB.transaction(SETTINGS_STORE, "readonly");
+      const store = tx.objectStore(SETTINGS_STORE);
+      const req = store.get(key);
+      req.onsuccess = (e)=> resolve(e.target.result);
+      req.onerror = (e)=> reject(e.target.error);
+    }catch(e){ reject(e); }
+  });
+}
+
+/* ===== UI helpers ===== */
+function notify(msg, type="ok", timeout=2000){
+  const nb = document.getElementById("notifBox");
+  nb.className = "notif" + (type==="error" ? " error" : "");
+  nb.innerText = msg;
+  nb.style.display = "block";
+  if (timeout) setTimeout(()=> nb.style.display = "none", timeout);
+}
+function showRestorePrompt(infoText){
+  const p = document.getElementById("restorePrompt");
+  document.getElementById("restoreInfo").innerText = infoText || "A temporary saved project was found from a previous session. Would you like to restore it?";
+  p.style.display = "block";
+}
+function hideRestorePrompt(){ document.getElementById("restorePrompt").style.display = "none"; }
+
+function escapeHtml(s){ return (s||"").replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function updateFileInfo(){
+  const total = topics.length || 0;
+  const coded = topics.filter(t=> t.FinalTheme && String(t.FinalTheme).trim().length>0).length;
+  document.getElementById("fileInfo").innerText = `Topics: ${total} — Coded: ${coded}`;
+}
+
+/* ===== Keyword parsing + highlighting (same approach as before) ===== */
+function parseKeywordsByMetric(kw_html){
+  const res = { Prob: [], FREX: [], Lift: [], Score: [] };
+  if (!kw_html) return res;
+  const txt = kw_html.replace(/<[^>]+>/g, "");
+  let working = txt.replace(/\s+/g,' ').trim();
+  ["Prob:","FREX:","Lift:","Score:"].forEach(m=>{
+    if(working.indexOf(m)===-1){
+      const low = m.toLowerCase();
+      if(working.indexOf(low)!==-1) working = working.replace(low,m);
+    }
+  });
+  try{
+    const regex = /(Prob:|FREX:|Lift:|Score:)/g;
+    let match; const markers=[];
+    while((match=regex.exec(working))!==null) markers.push({marker:match[1], index: match.index});
+    markers.push({marker:null, index: working.length});
+    for(let i=0;i<markers.length-1;i++){
+      const marker = markers[i].marker;
+      const start = markers[i].index + marker.length;
+      const end = markers[i+1].index;
+      const segment = working.substring(start,end).trim();
+      const items = segment.split(/[,\|;]/).map(s=>s.trim()).filter(s=>s);
+      if(marker==="Prob:") res.Prob = items;
+      if(marker==="FREX:") res.FREX = items;
+      if(marker==="Lift:") res.Lift = items;
+      if(marker==="Score:") res.Score = items;
+    }
+  }catch(e){ console.error(e); }
+  return res;
+}
+function buildKeywordClassMap(topic){
+  const m = parseKeywordsByMetric(topic.keywords_html || "");
+  const map = {};
+  function addMetric(list, cls){
+    (list || []).forEach(tok => {
+      let display = tok.trim();
+      if(!display) return;
+      display = display.replace(/^["'()]+|["'()]+$/g, '').trim();
+      const key = display.toLowerCase();
+      if(!map[key]) map[key] = { display: display, classes: new Set() };
+      map[key].classes.add(cls);
+    });
+  }
+  addMetric(m.Prob, 'kw-prob');
+  addMetric(m.FREX, 'kw-frex');
+  addMetric(m.Lift, 'kw-lift');
+  addMetric(m.Score, 'kw-score');
+  return map;
+}
+function escapeRegExp(string) { return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+function highlightKeywordsInElement(el, keywordMap){
+  if(!el) return;
+  if(!keywordMap || Object.keys(keywordMap).length===0) return;
+  const tokens = Object.values(keywordMap).map(k=>k.display).sort((a,b)=>b.length - a.length);
+  const tokenPatterns = tokens.map(t => escapeRegExp(t));
+  if(tokenPatterns.length===0) return;
+  const regex = new RegExp("(?<!\\w)(" + tokenPatterns.join("|") + ")(?!\\w)", "gi");
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+  const nodes = [];
+  while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(textNode => {
+    const parent = textNode.parentNode;
+    if(!parent) return;
+    const txt = textNode.nodeValue;
+    if(!txt || !regex.test(txt)) return;
+    regex.lastIndex = 0;
+    const frag = document.createDocumentFragment();
+    let lastIndex = 0;
+    let m;
+    while((m = regex.exec(txt)) !== null){
+      const matchText = m[0];
+      const start = m.index;
+      const end = regex.lastIndex;
+      if(start > lastIndex){ frag.appendChild(document.createTextNode(txt.slice(lastIndex, start))); }
+      const key = matchText.toLowerCase();
+      const entry = keywordMap[key];
+      const span = document.createElement('span');
+      span.className = 'highlighted';
+      if(entry){
+        const classes = Array.from(entry.classes);
+        classes.forEach(c => span.classList.add(c));
+        if(classes.length > 1){
+          const colorMap = { 'kw-prob': '#cfe6ff', 'kw-frex': '#dbf3df', 'kw-lift': '#ffd9d9', 'kw-score': '#fff1da' };
+          const stops = classes.map((c,i) => {
+            const pct1 = Math.round((i / classes.length) * 100);
+            const pct2 = Math.round(((i+1) / classes.length) * 100);
+            return `${colorMap[c] || '#eee'} ${pct1}% ${pct2}%`;
+          }).join(', ');
+          span.style.background = `linear-gradient(90deg, ${stops})`;
+          span.style.backgroundColor = '';
+          span.style.color = '#111';
+        } else {
+          span.style.background = '';
+          span.style.backgroundImage = '';
+          span.style.color = '';
+        }
+      }
+      span.textContent = matchText;
+      frag.appendChild(span);
+      lastIndex = end;
+    }
+    if(lastIndex < txt.length){ frag.appendChild(document.createTextNode(txt.slice(lastIndex))); }
+    parent.replaceChild(frag, textNode);
+  });
+}
+
+/* ===== Rendering and editing UI ===== */
+function renderTopic(idx){
+  const t = topics[idx];
+  const content = document.getElementById("contentArea");
+  if(!t){ content.innerHTML = "<p>No topic</p>"; document.getElementById("topicTitle").innerText = "No topic"; return; }
+  document.getElementById("topicTitle").innerText = "Topic " + t.TopicID;
+  document.getElementById("subTheme").value = t.SubTheme || "";
+  document.getElementById("finalTheme").value = t.FinalTheme || "";
+  document.getElementById("memo").value = t.memo || "";
+  // wire left-panel inputs to autosave (replace previous handlers)
+  (function(){
+    const idxLocal = idx;
+    const subEl = document.getElementById("subTheme");
+    const finEl = document.getElementById("finalTheme");
+    const memoEl = document.getElementById("memo");
+    if(subEl) subEl.oninput = (e)=>{ topics[idxLocal].SubTheme = e.target.value; scheduleAutoSave(); };
+    if(finEl) finEl.oninput = (e)=>{ topics[idxLocal].FinalTheme = e.target.value; scheduleAutoSave(); };
+    if(memoEl) memoEl.oninput = (e)=>{ topics[idxLocal].memo = e.target.value; scheduleAutoSave(); };
+  })();
+
+
+  let html = "";
+  t.RepDocs.forEach((rd, i) => {
+    const inputId = `initial_${idx}_${i}`;
+    html += `<div class="repdoc"><div class="meta">RepDoc ${i+1}</div><div class="doc-html" id="repdoc_html_${idx}_${i}">${rd.html || escapeHtml(rd.text || "")}</div><div class="repdoc-edit"><label>Initial Descriptive Code</label><input id="${inputId}" type="text" value="${escapeHtml(rd.initialCode||"")}" data-rdindex="${i}" /></div></div>`;
+  });
+  html += `<div class="actions"><button class="btn" id="saveInitial">Save Initial Codes</button></div>`;
+  content.innerHTML = html;
+
+  const keywordMap = buildKeywordClassMap(t);
+  t.RepDocs.forEach((rd,i)=>{ const el = document.getElementById(`repdoc_html_${idx}_${i}`); if(el) highlightKeywordsInElement(el, keywordMap); });
+
+  // wire inputs to autosave
+  // initial code inputs
+  t.RepDocs.forEach((rd,i)=>{
+    const inp = document.getElementById(`initial_${idx}_${i}`);
+    if(inp){
+      inp.addEventListener("input", (e)=>{
+        topics[idx].RepDocs[i].initialCode = e.target.value;
+        scheduleAutoSave();
+      });
+    }
+  });
+
+  var saveInitialBtn = document.getElementById("saveInitial");
+  if (saveInitialBtn) {
+    saveInitialBtn.addEventListener("click", ()=>{
+      topics[idx].lastSavedAt = new Date().toISOString();
+      immediateSaveToDB().then(()=>{ notify("Initial codes saved to DB ✔"); }).catch(()=> notify("Save failed","error"));
+    });
+  }
+  var saveLocalTopicBtn = document.getElementById("saveLocalTopic");
+  if (saveLocalTopicBtn) {
+    saveLocalTopicBtn.addEventListener("click", ()=>{
+      saveTopicFields(idx);
+      immediateSaveToDB().then(()=> notify("Topic saved to DB ✔")).catch(()=> notify("Save failed","error"));
+    });
+  }
+  var prevDocBtn = document.getElementById("prevDoc");
+  if (prevDocBtn) {
+    prevDocBtn.addEventListener("click", ()=> selectTopic(Math.max(0, idx-1)));
+  }
+  var nextDocBtn = document.getElementById("nextDoc");
+  if (nextDocBtn) {
+    nextDocBtn.addEventListener("click", ()=> selectTopic(Math.min(topics.length-1, idx+1)));
+  }
+}
+
+function renderSidebar(){
+  const cont = document.getElementById("topicList"); cont.innerHTML = "";
+  topics.forEach((t, idx)=>{
+    const div = document.createElement("div"); div.className = "topic-item"; div.dataset.idx = idx;
+    const doneMark = t.topicDone ? " ●" : "";
+    div.innerHTML = `<div style="font-weight:700">T${t.TopicID}${doneMark}</div>`;
+    div.onclick = ()=> selectTopic(idx);
+    cont.appendChild(div);
+  });
+  updateFileInfo();
+}
+
+function selectTopic(idx){
+  if(idx<0||idx>=topics.length) return;
+  currentIdx = idx;
+  document.querySelectorAll(".topic-item").forEach(el=>el.classList.remove("active"));
+  const el = document.querySelector(`.topic-item[data-idx='${idx}']`);
+  if(el) el.classList.add("active");
+  renderTopic(idx);
+  updateLegendPanel(idx);
+}
+
+/* Save topic fields from inputs (called on Save or autosave) */
+function saveTopicFields(idx){
+  const t = topics[idx];
+  if(!t) return;
+  t.SubTheme = document.getElementById("subTheme").value;
+  t.FinalTheme = document.getElementById("finalTheme").value;
+  t.memo = document.getElementById("memo").value;
+  t.RepDocs.forEach((rd,j)=>{ const el=document.getElementById(`initial_${idx}_${j}`); if(el) rd.initialCode = el.value; });
+  t.lastSavedAt = new Date().toISOString();
+  renderSidebar();
+}
+
+/* Legend */
+function updateLegendPanel(topicIndex){
+  const container = document.getElementById("legendContent");
+  if(!container) return;
+  if(typeof topicIndex !== 'number' || !topics[topicIndex]) { container.innerHTML = "(no data)"; return; }
+  const topic = topics[topicIndex];
+  // Parse keywords by metric, preserving order
+  const metrics = [
+    ['Prob', 'kw-prob'],
+    ['FREX', 'kw-frex'],
+    ['Lift', 'kw-lift'],
+    ['Score', 'kw-score']
+  ];
+  const parsed = parseKeywordsByMetric(topic.keywords_html || "");
+  let html = "";
+  metrics.forEach(([label, cls]) => {
+    const entries = parsed[label] || [];
+    if(entries.length === 0) {
+      html += `<div style=\"margin-bottom:6px;\"><span class=\"${cls}\" style=\"padding:2px 6px; border-radius:3px;\">${label}:</span> —</div>`;
+    } else {
+      html += `<div style=\"margin-bottom:6px; font-size:13px;\"><span class=\"${cls}\" style=\"padding:2px 6px; border-radius:3px;\">${label}:</span> `;
+  html += entries.map((tok, i) => `<span class=\"kw-inline ${cls}\">${escapeHtml(tok)}</span>`).join(', ');
+      html += `</div>`;
+    }
+  });
+  container.innerHTML = html;
+}
+
+/* Build snapshot for DB */
+function buildSnapshot(){
+  return { version:1, savedAt:new Date().toISOString(), cursor: currentIdx, topics: topics };
+}
+
+/* Autosave scheduling and immediate save */
+function scheduleAutoSave(){
+  if(autoSaveTimer) clearTimeout(autoSaveTimer);
+  autoSaveTimer = setTimeout(()=>{
+    saveTopicFields(currentIdx);
+    putToDB(buildSnapshot()).then(()=> notify("Auto-saved to DB ✔")).catch(err=>{ console.error(err); notify("Auto-save failed","error"); });
+  }, AUTO_SAVE_DELAY);
+}
+function immediateSaveToDB(){
+  saveTopicFields(currentIdx);
+  return putToDB(buildSnapshot());
+}
+
+/* Export/Import */
+async function exportFull(){
+  const full = { project_id: "stm_project_export", savedAt: new Date().toISOString(), topics: topics };
+  const jsonText = JSON.stringify(full, null, 2);
+  const blob = new Blob([jsonText], { type: "application/json" });
+
+  // Preferred: Use File System Access API to ensure we clear DB only after user saves
+  if (window.showSaveFilePicker) {
+    try {
+      let startInOpt = undefined;
+      try {
+        const prevHandle = await settingsGet(SETTINGS_KEY_EXPORT_HANDLE);
+        if (prevHandle) startInOpt = prevHandle; // browsers may open the directory of this handle
+      } catch(_) {}
+
+      const handle = await window.showSaveFilePicker({
+        suggestedName: (full.project_id || "stm_project") + "_export.json",
+        startIn: startInOpt,
+        types: [
+          {
+            description: "JSON Files",
+            accept: { "application/json": [".json"] }
+          }
+        ]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(blob);
+      await writable.close();
+
+      // Remember last chosen file/folder
+      try { await settingsPut(SETTINGS_KEY_EXPORT_HANDLE, handle); } catch(_) {}
+
+      // User has confirmed save; now clear DB and reset UI
+      await deleteFromDB();
+      topics = [];
+      currentIdx = 0;
+      renderSidebar();
+      document.getElementById("contentArea").innerHTML = '<p class="small">Representative documents will appear here.</p>';
+      document.getElementById("brandTitle").innerText = "Interactive STM Annotated Coder — IndexedDB Only (v4)";
+      notify("Exported and cleared Temp DB ✔");
+      return;
+    } catch (e) {
+      if (e && (e.name === 'AbortError' || e.message?.includes('aborted'))) {
+        // User cancelled the save dialog; do not clear DB
+        notify("Export cancelled. DB unchanged.");
+        return;
+      }
+      console.error("Export via File System Access API failed", e);
+      notify("Export failed — falling back to download","error");
+      // Fall through to fallback download
+    }
+  }
+
+  // Fallback: trigger a download and ask for explicit confirmation before clearing DB
+  try {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = (full.project_id || "stm_project") + "_export.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(a.href);
+
+    // Ask the user to confirm they have saved the file before clearing DB
+    const ok = confirm("The export file has been downloaded. Click OK once you have saved/kept it. Then the temporary DB will be cleared.");
+    if (ok) {
+      try {
+        await deleteFromDB();
+        topics = [];
+        currentIdx = 0;
+        renderSidebar();
+        document.getElementById("contentArea").innerHTML = '<p class="small">Representative documents will appear here.</p>';
+        document.getElementById("brandTitle").innerText = "Interactive STM Annotated Coder — IndexedDB Only (v4)";
+        notify("Exported and cleared Temp DB ✔");
+      } catch (err) {
+        console.error(err);
+        notify("Exported but failed to clear DB","error");
+      }
+    } else {
+      notify("Exported. DB not cleared (user cancelled).");
+    }
+  } catch (e) {
+    console.error("Fallback export failed", e);
+    notify("Export failed — download could not start","error");
+  }
+}
+function importFromFile(file){ return new Promise((resolve,reject)=>{ const fr=new FileReader(); fr.onload=e=>{ try{ resolve(JSON.parse(e.target.result)); }catch(err){ reject(err); } }; fr.onerror=err=>reject(err); fr.readAsText(file); }); }
+
+/* Parse uploaded annotated HTML */
+function parseAnnotatedHTML(htmlText, sourceName){
+  try {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlText, "text/html");
+    const topicNodes = Array.from(doc.querySelectorAll(".topic"));
+    if (!topicNodes.length) {
+      alert("No topics found. Ensure your HTML uses class='topic' and that each topic contains a '.keywords' and '.repdoc' element.");
+      return;
+    }
+    topics = topicNodes.map(node => {
+      let id = node.id || "";
+      if (id && id.toLowerCase().startsWith("topic-")) id = id.split("-").pop();
+      if (!id) { const h = node.querySelector(".topic-title"); id = h ? (h.textContent.match(/\d+/)||[""])[0] : Math.random().toString(36).slice(2,6); }
+      const kwNodes = node.querySelectorAll(".keywords");
+      const kw_html = Array.from(kwNodes).map(k=>k.innerHTML).join(" | ");
+      const repNodes = Array.from(node.querySelectorAll(".repdoc"));
+      const repDocs = repNodes.map(rn => ({ html: rn.innerHTML, text: rn.textContent.trim(), initialCode: rn.getAttribute('data-initial') || "" }));
+      return { TopicID: String(id), keywords_html: kw_html, RepDocs: repDocs, SubTheme: "", FinalTheme: "", memo: "", topicDone: false };
+    });
+    topics.sort((a,b) => (Number(a.TopicID)||0) - (Number(b.TopicID)||0));
+    currentIdx = 0;
+    // Update heading with file name
+    if (sourceName) {
+      document.getElementById("brandTitle").innerText = sourceName + " — STM Annotated Coder";
+    }
+    renderSidebar();
+    {
+      const n = getNextUnlabeledTopicIdx();
+      if (n === null) { selectTopic(0); notify("All topics coded/done"); }
+      else { selectTopic(n); }
+    }
+    // save immediately to DB
+    putToDB(buildSnapshot()).then(()=> notify("Project loaded and saved to DB ✔")).catch(()=> notify("Loaded but save to DB failed","error"));
+  } catch(e) {
+    console.error("parseAnnotatedHTML failed", e);
+    notify("Failed to parse HTML", "error");
+    alert("Failed to parse HTML: " + (e.message || e));
+  }
+}
+
+/* Wiring */
+document.addEventListener('DOMContentLoaded', async function(){
+  var btnUploadHtml = document.getElementById("btn-upload-html");
+  var htmlFileInput = document.getElementById("htmlfile");
+  if (btnUploadHtml && htmlFileInput) {
+    btnUploadHtml.addEventListener("click", function() {
+      htmlFileInput.value = ""; // Always reset before opening
+      htmlFileInput.click();
+    });
+    htmlFileInput.addEventListener("change", function(e){
+      const f = this.files[0]; if(!f) return;
+      const reader = new FileReader();
+      reader.onload = function(ev){
+        try {
+          parseAnnotatedHTML(ev.target.result, f.name);
+        } catch (err) {
+          alert("Parsing error: " + (err.message || err));
+        }
+        updateFileInfo();
+        htmlFileInput.value = ""; // Reset input so same file can be re-uploaded
+      };
+      reader.readAsText(f);
+    });
+  }
+
+  document.getElementById("btn-save").addEventListener("click", async ()=>{
+    try{ await immediateSaveToDB(); notify("Saved to DB ✔"); }catch(e){ console.error(e); notify("Save failed","error"); }
+  });
+  document.getElementById("btn-export-json").addEventListener("click", ()=> exportFull());
+  document.getElementById("btn-import-json").addEventListener("click", ()=> { const inp = document.getElementById("importFile"); inp.value = ""; inp.click(); });
+  document.getElementById("importFile").addEventListener("change", async function(e){
+    const f = this.files[0]; if(!f) return;
+    try{
+      const obj = await importFromFile(f);
+      if (obj && obj.topics) {
+        topics = obj.topics;
+        topics.forEach(t=>{ t.topicDone = !!t.topicDone; t.RepDocs = t.RepDocs || []; });
+        renderSidebar();
+        {
+          const n = getNextUnlabeledTopicIdx();
+          if (n === null) { selectTopic(0); notify("All topics coded/done"); }
+          else { selectTopic(n); }
+        }
+        putToDB(buildSnapshot()).then(()=> notify("Imported and saved to DB ✔")).catch(()=> notify("Imported but DB save failed","error"));
+      } else { alert("Imported JSON does not appear to be a project (missing topics)."); }
+    }catch(err){ console.error(err); alert("Failed to import JSON: " + err.message); }
+    finally { this.value = ""; }
+  });
+
+  document.getElementById("btn-clear-db").addEventListener("click", async ()=>{
+    if(!confirm("Clear temporary DB? This will remove the auto-saved project.")) return;
+  try{ await deleteFromDB(); topics = []; currentIdx = 0; renderSidebar(); document.getElementById("contentArea").innerHTML = '<p class="small">Representative documents will appear here.</p>'; document.getElementById("brandTitle").innerText = "Interactive STM Annotated Coder — IndexedDB Only (v4)"; notify("Temp DB cleared ✔"); }catch(e){ console.error(e); notify("Clear DB failed","error"); }
+  });
+
+  document.getElementById("btn-next-unlabeled").addEventListener("click", ()=> { const n=getNextUnlabeledTopicIdx(); if(n===null) notify("All topics coded/done"); else selectTopic(n); });
+  document.getElementById("btn-mark-done").addEventListener("click", ()=> { const t=topics[currentIdx]; if(!t) return alert("No topic selected"); t.topicDone=true; t.topicDoneAt=new Date().toISOString(); scheduleAutoSave(); renderSidebar(); updateFileInfo(); notify("Marked done (will autosave)"); });
+
+  document.getElementById("btn-save-topic").addEventListener("click", ()=>{ saveTopicFields(currentIdx); scheduleAutoSave(); notify("Topic updated (will autosave)"); });
+  document.getElementById("btn-save-topic-local").addEventListener("click", ()=>{ saveTopicFields(currentIdx); scheduleAutoSave(); notify("Topic updated (will autosave)"); });
+
+  // wire inputs (subTheme, finalTheme, memo) to autosave for immediate persistence
+  ['subTheme','finalTheme','memo'].forEach(id=>{
+    const el = document.getElementById(id);
+    el.addEventListener('input', ()=>{ scheduleAutoSave(); });
+  });
+
+  // On load, check DB for saved project and prompt restore
+  try{
+    await openDB();
+    const proj = await getFromDB();
+    if(proj && proj.topics && proj.topics.length){
+      showRestorePrompt(`A temporary project (saved ${proj.savedAt || "earlier"}) was found. Restore it?`);
+      document.getElementById("btn-restore-db").onclick = async function(){
+        hideRestorePrompt();
+        topics = proj.topics || [];
+        currentIdx = proj.cursor || 0;
+        renderSidebar();
+        selectTopic(Math.min(currentIdx, topics.length-1));
+        notify("Restored from Temp DB ✔");
+      };
+      document.getElementById("btn-ignore-db").onclick = function(){ hideRestorePrompt(); notify("Ignored Temp DB"); };
+    }
+  }catch(e){ console.error("DB check failed", e); notify("DB check failed","error"); }
+
+});
+
+/* Utility */
+function getNextUnlabeledTopicIdx(){ for(let i=0;i<topics.length;i++){ const t=topics[i]; if(!t.topicDone && (!t.FinalTheme || t.FinalTheme.trim()==="")) return i; } for(let i=0;i<topics.length;i++) if(!topics[i].topicDone) return i; return null; }
+
+
+
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', async function(){
+  try{
+    await openDB();
+    const proj = await getFromDB();
+    if(proj && proj.topics && proj.topics.length){
+      showRestorePrompt(`A temporary project (saved ${proj.savedAt || "earlier"}) was found. Restore it?`);
+      document.getElementById("btn-restore-db").onclick = async function(){
+        hideRestorePrompt();
+        topics = proj.topics || [];
+        currentIdx = proj.cursor || 0;
+        renderSidebar();
+        selectTopic(Math.min(currentIdx, topics.length-1));
+        notify("Restored from Temp DB ✔");
+      };
+      document.getElementById("btn-ignore-db").onclick = function(){ hideRestorePrompt(); notify("Ignored Temp DB"); };
+    }
+  }catch(e){ console.error("DB check failed", e); notify("DB check failed","error"); }
+});
+</script>
+
+</body>
+</html>

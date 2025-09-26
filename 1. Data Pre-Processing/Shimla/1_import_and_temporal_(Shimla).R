@@ -25,7 +25,7 @@ mall_reviews$Source <- "Mall"
 ridge_reviews$Source <- "Ridge"
 
 #Merge Data
-all_reviews <- rbind(mall_reviews, ridge_reviews) # n = 1357
+all_reviews <- rbind(mall_reviews, ridge_reviews) # n = 3757
 
 # Mutate Doc ID
 all_reviews <- all_reviews %>%
@@ -89,6 +89,9 @@ all_reviews <- all_reviews %>%
                 Month %in% c("09", "10", "11") ~ "Autumn (Sep-Nov)"
         )) %>%
         select(-Month, -Year)
+
+#----------------------- Summary ---------------------------#
+table(all_reviews$Season)
 
 
 

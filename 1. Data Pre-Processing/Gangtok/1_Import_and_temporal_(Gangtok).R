@@ -69,6 +69,9 @@ seasonal_counts <- gangtok_reviews %>%
         group_by(Season, Year) %>%
         summarise(Count = n(), .groups = 'drop')
 
+#-------------------------- Summary ---------------------------#
+table(gangtok_reviews$Season)
+
 # Review Data
 gangtok_reviews <- gangtok_reviews %>%
         select(doc_id, Source, Date, Season,Tourist_Home_location, raw_text)
