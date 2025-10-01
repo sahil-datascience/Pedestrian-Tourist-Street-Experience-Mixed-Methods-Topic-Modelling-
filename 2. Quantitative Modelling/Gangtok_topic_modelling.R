@@ -56,13 +56,13 @@ saveRDS(out, "Data/r_data/gangtok_stm_out.rds")
 
 #searchK
 # Save searchK results
-#saveRDS(searchK, "Data/MG Road Gangtok/searchK_[5-80].rds")
-#saveRDS(searchK, "Data/MG Road Gangtok/searchK_[10-30].rds")
+#saveRDS(searchK, ""2. Quantitative Modelling/searchK_Data/Gangtok_searchK_[5-80].rds")
+#saveRDS(searchK, "2. Quantitative Modelling/searchK_Data/Gangtok_searchK_[10-30].rds")
 
 
 # Load searchK results
 #searchK <- readRDS("Data/MG Road Gangtok/searchK_[5-80].rds")
-searchK <- readRDS("Data/MG Road Gangtok/searchK_[10-30].rds")
+searchK <- readRDS("2. Quantitative Modelling/searchK_Data/Gangtok_searchK_[10-30].rds")
 searchK
 plot(searchK)
 
@@ -109,12 +109,19 @@ searchK$results %>%
                    y = value,
                    color = metric)) + 
         geom_point() + 
-        geom_vline(xintercept = 14, linetype = "dotted", color = "red") +  
-        geom_vline(xintercept = 18, linetype = "dotted", color = "blue") +
-        geom_vline(xintercept = 11, linetype = "dotted", color = "blue") +
+        geom_vline(xintercept = 14, linetype = 2, color = "red") +  
+        #geom_vline(xintercept = 18, linetype = "dotted", color = "blue") +
+        #geom_vline(xintercept = 11, linetype = "dotted", color = "blue") +
         facet_wrap( ~ metric, scales = "free_y") +
-        labs(x = "K", y = "Value", color = "Metric") + 
-        theme(text = element_text("Times New Roman"))
+        labs(x = "K", y = "Value", color = "Metric",
+             title = "Find K Metrics for Gangtok",
+             subtitle = "Selected K 14 (Dotted Red Line)") + 
+        theme(text = element_text("Times New Roman"),
+              plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+              plot.subtitle = element_text(hjust = 0.5, size = 12, face = "italic"))
+
+# save the plot
+ggsave("2. Quantitative Modelling/searchK_Data/gangtok_searchK_plot.svg", width = 10, height = 6)
 
 
 #### Candidate K values: 14 or 18
@@ -128,11 +135,21 @@ stm_model_14 <- stm(
         data = review_df,
         K = 14
 )
-plot(stm_model_14)
-
+plot(stm_model_14, main = "STM Model for Gangtok (K 14)")
 # Save Topic Model
 
 saveRDS(stm_model_14, "Data/r_data/stm_model_k14.rds")
+
+# Plot
+
+plot(stm_model_14, type = "summary", n = 5, main = "Topic Summary Plot for Gangtok (K 14)")
+
+
+
+
+# Plot Topics Using GGPLOT
+
+
 
 
 
