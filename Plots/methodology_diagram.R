@@ -641,14 +641,12 @@ grViz(dot)
 grViz(monochrome_dot)
 
 # --- Export (optional) ---
-#svg_xml <- DiagrammeRsvg::export_svg(grViz(dot))
-#charToRaw(svg_xml) %>% rsvg::rsvg_png("methodology_workflow.png")
-#rsvg::rsvg_svg(charToRaw(svg_xml), "methodology_workflow.svg")
+svg_xml <- DiagrammeRsvg::export_svg(grViz(dot))
+charToRaw(svg_xml) %>% rsvg::rsvg_png("Plots/methodology_workflow.png")
+rsvg::rsvg_svg(charToRaw(svg_xml), "Plots/methodology_workflow.svg")
 
 #----------------------------------------------------------------
 #
 #
-#----------------------------------------------------------------
-
-
+#---------------------------------------------------------------
 
