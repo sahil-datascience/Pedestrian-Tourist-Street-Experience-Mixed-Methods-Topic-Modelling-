@@ -4,9 +4,13 @@
 
 ---
 
+
 ## 📄 About This Repository
 
 This repository accompanies the research study:
+
+
+![Paper Preview](PTSE.jpeg)
 
 > Sharma, S., Khan, S., & Chauhan, R. (2026). Decoding the pedestrian tourist street experience (PTSE): An open-source text analytics framework systematically fortifying computational scale with qualitative depth. _Tourism Recreation Research_. https://doi.org/10.1080/02508281.2026.2637475
 
