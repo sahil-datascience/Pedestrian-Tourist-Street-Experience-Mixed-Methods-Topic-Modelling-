@@ -1,0 +1,602 @@
+[
+  {
+    "doc_id": "text811",
+    "raw_text": "An average Street, nothing great Its my Personal view, its just a patch of a well kept and clean street with shops, eating joints and other utility store, Since parking can be issue around, so if you are self driving to Sikkim, I would suggest to leave your car in hotel and catch a taxi to this place, which drops you near the street, The street has branded cloth stores (No use) like any city in plains and some woolen stores. For me personally not much to do or explore here.",
+    "Topic_3": 0.8842,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text1305",
+    "raw_text": "Overhyped Place and No social distancing in Resturants Good Eateries and Shopping but a bit too overrated. Nothing that stands out given that it's so big a deal in Gangtok. A lot of such streets are there in cities like Mumbai and Delhi so didn't find anything unique! Also most of the restaurants are small and don't give any importance to social distancing inside. Not a safe bet during Covid Times",
+    "Topic_3": 0.8373,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text1100",
+    "raw_text": "So pricey! Everything here is so pricey! But there are enough shops to stock up on supplies (jackets, gloves, etc) before going to other colder places nearby.",
+    "Topic_3": 0.8232,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text372",
+    "raw_text": "Chinese Products Shopping in Gangtok is waste- you will find all chinese products and you will waste your time. .....",
+    "Topic_3": 0.8107,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text469",
+    "raw_text": "Didn't Get the best experience as mentioned by other travellers We went there in the evening expecting to shop for some woollens and souvenirs. However it was saturday evening and one section of shops were shut. The second section has all major brands like LP, Pizza Hut etc which were were not interested. \n\nWe got into one souvenir shop but thought the prayers wheels were too expensive upwards of 2k for small ones. However throughout our trip later we did not find good quality prayer wheels so may be this is the place if you want to shop em. \n\nSince this is the main road, taxis are easily available to go here and on return too.\nThis is a good walk as there are no cars but nothing exceptional.",
+    "Topic_3": 0.804,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text554",
+    "raw_text": "Highly overrated Everyone will ask you to visit MG Marg for shops and Sikkimese food. The truth is its pretty ovverated, crowded & expensive. You should rather head over to Lal Bazar for local trinkets and decoration items. As far as local food is concerned-there are several other places in Gangtok which you could try out.",
+    "Topic_3": 0.7437,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text795",
+    "raw_text": "Nothing much to offer It is like any other shopping areas with big brands. the only good thing is the walk on MG road, if you are there for shopping for local stuff it doesn't have much to offer. the food is bad",
+    "Topic_3": 0.5807,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text907",
+    "raw_text": "Only main shopping area This is the only major shopping area, it is worth walking on the street, except local liquor, we should not buy anything here, there is no specific items to buy here.",
+    "Topic_3": 0.1335,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text641",
+    "raw_text": "It's just another market Nothing special except the view at the entrance. Clean and well arranged. it has shops where you can buy a true copy of branded goods like shoes, clothes etc. Restaurants are available in good numbers.",
+    "Topic_3": 0.0661,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text1130",
+    "raw_text": "Over crowded walking street I returned to Gangtok after 6 years but to be disappointed this time. The MG Marg had a pleasant feeling before where you can sit for hours and enjoy the surrounding and weather. But due to the raise in traffic now there is limited area to walk around. Also previously MG Marg was to promote local sellers with unique stuffs. Now this location has completely changed to High and expensive brands.",
+    "Topic_3": 0.0462,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text706",
+    "raw_text": "Happening Place To Spend Good Time :) MG Marg Market of Gangtok is very happening place with good crowd where you can spend good time with your friends and family. Sufficient benches to sit and very lively and colorful market. Moreover, you will find good eating joints to spend quality time. Suggestion: don't order typical Indian food as it's not good, rather go for veg/non-veg starters or their local cuisine. Also, not worth spending on shopping as things are exorbitant and not of high quality. You can find such stuff easily in your cities also.",
+    "Topic_3": 0.0367,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text700",
+    "raw_text": "Not worth it Go here if you want to kill time..there is nothing much to see or buy from here...usually the locals are seen shopping from here..",
+    "Topic_3": 0.0271,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text1137",
+    "raw_text": "Slightly overrated Though it’s a beautiful road very well maintained nice clean beautiful you will love everything about the marg. Drawback is the market closes around 8pm which for us was too soon. Don’t have any activity to do like games shows anything. Shopping also not anything great. Have few restaurants which r good but not many options best we liked was OSM. Amazing food and service",
+    "Topic_3": 0.026,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text991",
+    "raw_text": "Over rated area M G Marg which is primarily a walking street for tourists with shopping & eating places located on it. But some basic requirements of a hill stations are missing . Their are no hawkers serving hot chana ,pakora,popcorn etc on streets .",
+    "Topic_3": 0.0205,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text908",
+    "raw_text": "Just like any other market During free time you can take a walk down the street, i did't felt worth buying any thing from the market.",
+    "Topic_3": 0.0194,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text936",
+    "raw_text": "MG marg waste of time Normally tourist want to buy some traditional and unique thing on MG road or mall road, however, you will not find any typical / traditinal or unique thing in this area.",
+    "Topic_3": 0.0193,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text218",
+    "raw_text": "M G Road Place to pass time shopping goods, mostly chinese and in peak season place to get robbed if you are not good in bargaining. The locals are ok but taxis rob if your hotel is not near by. The marwaris and Beharis are having good business there.",
+    "Topic_3": 0.0186,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text617",
+    "raw_text": "Mall Road - Nothing special Gangtok's prime street with shopping options of the regular kind we find in most of the Indian cities. Only plus points are no vehicles and no litter.",
+    "Topic_3": 0.0175,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text546",
+    "raw_text": "Nothing great except cleanliness Hyped place. There are local shop n restaurant, but nothing great about this . No natural view and the area is just covered with hotels and shops...It's more like a conjusted Market place. Too rush in the evening, people all over the place.",
+    "Topic_3": 0.017,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text134",
+    "raw_text": "Something that Tourist Considers So far, it is the only place for city lovers to hangout. Due to the peak season, it was over crowded. I tried some shopping but was expensive through.",
+    "Topic_3": 0.0163,
+    "Topic_Identified": "Topic_3"
+  },
+  {
+    "doc_id": "text305",
+    "raw_text": "Okok Place I didn't like much the place was too crowded may be becoz of Christmas the celebration was also not so good as I had heard. OK visit 1 time will be enough",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.7859
+  },
+  {
+    "doc_id": "text706",
+    "raw_text": "Happening Place To Spend Good Time :) MG Marg Market of Gangtok is very happening place with good crowd where you can spend good time with your friends and family. Sufficient benches to sit and very lively and colorful market. Moreover, you will find good eating joints to spend quality time. Suggestion: don't order typical Indian food as it's not good, rather go for veg/non-veg starters or their local cuisine. Also, not worth spending on shopping as things are exorbitant and not of high quality. You can find such stuff easily in your cities also.",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.7722
+  },
+  {
+    "doc_id": "text344",
+    "raw_text": "Very Costly Please avoid buying anything from MD Marg. Things are very costly thought the market is very clean and good looking. Better to walk down through the stairs from MG Marg and buy from Lal Market.",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.5964
+  },
+  {
+    "doc_id": "text218",
+    "raw_text": "M G Road Place to pass time shopping goods, mostly chinese and in peak season place to get robbed if you are not good in bargaining. The locals are ok but taxis rob if your hotel is not near by. The marwaris and Beharis are having good business there.",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.5889
+  },
+  {
+    "doc_id": "text997",
+    "raw_text": "Over hyped Over hyped! Other hill stations have better markets. Just a man averaging market. Nothing fancy. The good point is, it’s maintained beautifully, so good to walk down once!",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.2309
+  },
+  {
+    "doc_id": "text636",
+    "raw_text": "Why is this place famous? I didn't find this place as famous as people used to say. A little over-hyped with some good places to eat but very crowded.",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.2105
+  },
+  {
+    "doc_id": "text1137",
+    "raw_text": "Slightly overrated Though it’s a beautiful road very well maintained nice clean beautiful you will love everything about the marg. Drawback is the market closes around 8pm which for us was too soon. Don’t have any activity to do like games shows anything. Shopping also not anything great. Have few restaurants which r good but not many options best we liked was OSM. Amazing food and service",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.2057
+  },
+  {
+    "doc_id": "text881",
+    "raw_text": "Place for evening stroll If I compare this place with Manali Mall road, it would not be standing anywhere nearby, in terms of it's stretch, variety of goods availability, liveliness. Nevertheless this place has an attraction of it's own, and people throng this place to buy local stuffs and warm clothes. But I wouldn't recommend this place for buying as the stuffs are either China made or nothing special. You may try other place or Lal Bazaar instead. Also this place shuts down by 9 pm, so you would have to plan accordingly. I couldn't find any attractive food joints too here. Moreover, Gangtok had disappointed me in terms of availability of non-vegetarian food or for that matter Momos.",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.1886
+  },
+  {
+    "doc_id": "text134",
+    "raw_text": "Something that Tourist Considers So far, it is the only place for city lovers to hangout. Due to the peak season, it was over crowded. I tried some shopping but was expensive through.",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.1781
+  },
+  {
+    "doc_id": "text641",
+    "raw_text": "It's just another market Nothing special except the view at the entrance. Clean and well arranged. it has shops where you can buy a true copy of branded goods like shoes, clothes etc. Restaurants are available in good numbers.",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.1702
+  },
+  {
+    "doc_id": "text469",
+    "raw_text": "Didn't Get the best experience as mentioned by other travellers We went there in the evening expecting to shop for some woollens and souvenirs. However it was saturday evening and one section of shops were shut. The second section has all major brands like LP, Pizza Hut etc which were were not interested. \n\nWe got into one souvenir shop but thought the prayers wheels were too expensive upwards of 2k for small ones. However throughout our trip later we did not find good quality prayer wheels so may be this is the place if you want to shop em. \n\nSince this is the main road, taxis are easily available to go here and on return too.\nThis is a good walk as there are no cars but nothing exceptional.",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.1337
+  },
+  {
+    "doc_id": "text795",
+    "raw_text": "Nothing much to offer It is like any other shopping areas with big brands. the only good thing is the walk on MG road, if you are there for shopping for local stuff it doesn't have much to offer. the food is bad",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.1158
+  },
+  {
+    "doc_id": "text908",
+    "raw_text": "Just like any other market During free time you can take a walk down the street, i did't felt worth buying any thing from the market.",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.0945
+  },
+  {
+    "doc_id": "text546",
+    "raw_text": "Nothing great except cleanliness Hyped place. There are local shop n restaurant, but nothing great about this . No natural view and the area is just covered with hotels and shops...It's more like a conjusted Market place. Too rush in the evening, people all over the place.",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.0943
+  },
+  {
+    "doc_id": "text554",
+    "raw_text": "Highly overrated Everyone will ask you to visit MG Marg for shops and Sikkimese food. The truth is its pretty ovverated, crowded & expensive. You should rather head over to Lal Bazar for local trinkets and decoration items. As far as local food is concerned-there are several other places in Gangtok which you could try out.",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.0831
+  },
+  {
+    "doc_id": "text1243",
+    "raw_text": "MG marg Not a great place if you actually want to get some stuff. If you want to buy some mementos then you may. Bargaining doesn't really work because if you don't then there are others who will buy irrespective of the prices.",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.0829
+  },
+  {
+    "doc_id": "text991",
+    "raw_text": "Over rated area M G Marg which is primarily a walking street for tourists with shopping & eating places located on it. But some basic requirements of a hill stations are missing . Their are no hawkers serving hot chana ,pakora,popcorn etc on streets .",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.0819
+  },
+  {
+    "doc_id": "text568",
+    "raw_text": "A lame with triple capacity crowd We were there yesterday and found this place over loaded , not a great scenic place . Taxi drivers bargain and restaurant has minimum 30 minutes waiting for dinner .",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.0717
+  },
+  {
+    "doc_id": "text907",
+    "raw_text": "Only main shopping area This is the only major shopping area, it is worth walking on the street, except local liquor, we should not buy anything here, there is no specific items to buy here.",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.0674
+  },
+  {
+    "doc_id": "text30",
+    "raw_text": "Nice place to roam but horrible place for shopping Advantages of this place\n\n1. The place is very clean \n2. Its really a very nice place to roam in the evening\n\nThe disadvantages.......\n\n1. The market is expensive. The things found in market are very cheap outside.\n2. The owner or employees of the stores doesnot know the proper way of behaving the tourist.\n3. The shop's staff have taken all the tourist for granted and so they don't care whether you buy or not.\n So don't bergain.Its of no use.",
+    "Topic_Identified": "Topic_4",
+    "Topic_4": 0.0596
+  },
+  {
+    "doc_id": "text882",
+    "raw_text": "V V Prasad Not so interesting in comparison to Shimla Mall Road. \nIf one is having time then only thought of but not compulsory sight seeing",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.8503
+  },
+  {
+    "doc_id": "text1223",
+    "raw_text": "less shop to choose the product you want to buy I didn't enjoy much in MG Marg, rather I have to tell you that I enjoyed much in Mall road, Shimla and mall road at Manali. MG marg is also nice and tidy but I don't know what is lacking. it didn't attract me much.",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.8336
+  },
+  {
+    "doc_id": "text879",
+    "raw_text": "A big disappointment We had been to MG Marg in April 2009. It was so very beautiful then. There were flowers hanging from the baskets all along the road and near the seating arrangements. But we did not find that beauty this time. It looked very ordinary. It was a big disappointment",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.8196
+  },
+  {
+    "doc_id": "text936",
+    "raw_text": "MG marg waste of time Normally tourist want to buy some traditional and unique thing on MG road or mall road, however, you will not find any typical / traditinal or unique thing in this area.",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.7545
+  },
+  {
+    "doc_id": "text739",
+    "raw_text": "Too crowded for my liking.... The mall area of Gangtok, the heart of the city. Frankly, I liked the ones in Darjeeling and Manali way more than this one. This actually looked more like an ordinary market place at the peak of business hours. The only plus point - the adorable dogs I came across on the pavement.",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.633
+  },
+  {
+    "doc_id": "text617",
+    "raw_text": "Mall Road - Nothing special Gangtok's prime street with shopping options of the regular kind we find in most of the Indian cities. Only plus points are no vehicles and no litter.",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.5582
+  },
+  {
+    "doc_id": "text997",
+    "raw_text": "Over hyped Over hyped! Other hill stations have better markets. Just a man averaging market. Nothing fancy. The good point is, it’s maintained beautifully, so good to walk down once!",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.1313
+  },
+  {
+    "doc_id": "text1130",
+    "raw_text": "Over crowded walking street I returned to Gangtok after 6 years but to be disappointed this time. The MG Marg had a pleasant feeling before where you can sit for hours and enjoy the surrounding and weather. But due to the raise in traffic now there is limited area to walk around. Also previously MG Marg was to promote local sellers with unique stuffs. Now this location has completely changed to High and expensive brands.",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.0893
+  },
+  {
+    "doc_id": "text991",
+    "raw_text": "Over rated area M G Marg which is primarily a walking street for tourists with shopping & eating places located on it. But some basic requirements of a hill stations are missing . Their are no hawkers serving hot chana ,pakora,popcorn etc on streets .",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.088
+  },
+  {
+    "doc_id": "text568",
+    "raw_text": "A lame with triple capacity crowd We were there yesterday and found this place over loaded , not a great scenic place . Taxi drivers bargain and restaurant has minimum 30 minutes waiting for dinner .",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.0435
+  },
+  {
+    "doc_id": "text881",
+    "raw_text": "Place for evening stroll If I compare this place with Manali Mall road, it would not be standing anywhere nearby, in terms of it's stretch, variety of goods availability, liveliness. Nevertheless this place has an attraction of it's own, and people throng this place to buy local stuffs and warm clothes. But I wouldn't recommend this place for buying as the stuffs are either China made or nothing special. You may try other place or Lal Bazaar instead. Also this place shuts down by 9 pm, so you would have to plan accordingly. I couldn't find any attractive food joints too here. Moreover, Gangtok had disappointed me in terms of availability of non-vegetarian food or for that matter Momos.",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.0399
+  },
+  {
+    "doc_id": "text344",
+    "raw_text": "Very Costly Please avoid buying anything from MD Marg. Things are very costly thought the market is very clean and good looking. Better to walk down through the stairs from MG Marg and buy from Lal Market.",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.0202
+  },
+  {
+    "doc_id": "text546",
+    "raw_text": "Nothing great except cleanliness Hyped place. There are local shop n restaurant, but nothing great about this . No natural view and the area is just covered with hotels and shops...It's more like a conjusted Market place. Too rush in the evening, people all over the place.",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.0168
+  },
+  {
+    "doc_id": "text1301",
+    "raw_text": "Terrible for a tourist location 3 cafes, maybe 3 restaurants. That's all. Literally it. Maybe the walk, but nothing else. \n\nThe rest of the market is paint shops, grocery stores, barbers, banks, offices, travel agents. Not much you can do here as a tourist.",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.0162
+  },
+  {
+    "doc_id": "text305",
+    "raw_text": "Okok Place I didn't like much the place was too crowded may be becoz of Christmas the celebration was also not so good as I had heard. OK visit 1 time will be enough",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.0162
+  },
+  {
+    "doc_id": "text636",
+    "raw_text": "Why is this place famous? I didn't find this place as famous as people used to say. A little over-hyped with some good places to eat but very crowded.",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.0151
+  },
+  {
+    "doc_id": "text908",
+    "raw_text": "Just like any other market During free time you can take a walk down the street, i did't felt worth buying any thing from the market.",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.0149
+  },
+  {
+    "doc_id": "text1137",
+    "raw_text": "Slightly overrated Though it’s a beautiful road very well maintained nice clean beautiful you will love everything about the marg. Drawback is the market closes around 8pm which for us was too soon. Don’t have any activity to do like games shows anything. Shopping also not anything great. Have few restaurants which r good but not many options best we liked was OSM. Amazing food and service",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.0129
+  },
+  {
+    "doc_id": "text795",
+    "raw_text": "Nothing much to offer It is like any other shopping areas with big brands. the only good thing is the walk on MG road, if you are there for shopping for local stuff it doesn't have much to offer. the food is bad",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.0108
+  },
+  {
+    "doc_id": "text134",
+    "raw_text": "Something that Tourist Considers So far, it is the only place for city lovers to hangout. Due to the peak season, it was over crowded. I tried some shopping but was expensive through.",
+    "Topic_Identified": "Topic_5",
+    "Topic_5": 0.0108
+  },
+  {
+    "doc_id": "text567",
+    "raw_text": "For shopping or Dinner yoiu can go MG Marg, we visited 2 days there for Dinner but after 9pm no Hotel gives entry. If going for shopping or Dinner must go by 7pm and by 8pm have dinner and then do what you like. Normally in peak season there is rush and difficult to get food.",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.8187
+  },
+  {
+    "doc_id": "text898",
+    "raw_text": "Too crowded, nothing great ( but wonderful place for ladies to shop) Its a very crowded place and there are cheap markets on the steps ( both sides) from the central location (near the cinema). The food and hotels like Parivar are highly overpriced and the taste is below average. The hype created is too much and please keep your expectations low at these hotels. The owners are arrogant mostly . Not worth your time unless you like some cheap shopping.",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.7346
+  },
+  {
+    "doc_id": "text907",
+    "raw_text": "Only main shopping area This is the only major shopping area, it is worth walking on the street, except local liquor, we should not buy anything here, there is no specific items to buy here.",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.6628
+  },
+  {
+    "doc_id": "text546",
+    "raw_text": "Nothing great except cleanliness Hyped place. There are local shop n restaurant, but nothing great about this . No natural view and the area is just covered with hotels and shops...It's more like a conjusted Market place. Too rush in the evening, people all over the place.",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.2326
+  },
+  {
+    "doc_id": "text795",
+    "raw_text": "Nothing much to offer It is like any other shopping areas with big brands. the only good thing is the walk on MG road, if you are there for shopping for local stuff it doesn't have much to offer. the food is bad",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.1641
+  },
+  {
+    "doc_id": "text991",
+    "raw_text": "Over rated area M G Marg which is primarily a walking street for tourists with shopping & eating places located on it. But some basic requirements of a hill stations are missing . Their are no hawkers serving hot chana ,pakora,popcorn etc on streets .",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.0654
+  },
+  {
+    "doc_id": "text739",
+    "raw_text": "Too crowded for my liking.... The mall area of Gangtok, the heart of the city. Frankly, I liked the ones in Darjeeling and Manali way more than this one. This actually looked more like an ordinary market place at the peak of business hours. The only plus point - the adorable dogs I came across on the pavement.",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.0513
+  },
+  {
+    "doc_id": "text936",
+    "raw_text": "MG marg waste of time Normally tourist want to buy some traditional and unique thing on MG road or mall road, however, you will not find any typical / traditinal or unique thing in this area.",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.0505
+  },
+  {
+    "doc_id": "text908",
+    "raw_text": "Just like any other market During free time you can take a walk down the street, i did't felt worth buying any thing from the market.",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.0334
+  },
+  {
+    "doc_id": "text1137",
+    "raw_text": "Slightly overrated Though it’s a beautiful road very well maintained nice clean beautiful you will love everything about the marg. Drawback is the market closes around 8pm which for us was too soon. Don’t have any activity to do like games shows anything. Shopping also not anything great. Have few restaurants which r good but not many options best we liked was OSM. Amazing food and service",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.0282
+  },
+  {
+    "doc_id": "text134",
+    "raw_text": "Something that Tourist Considers So far, it is the only place for city lovers to hangout. Due to the peak season, it was over crowded. I tried some shopping but was expensive through.",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.0272
+  },
+  {
+    "doc_id": "text997",
+    "raw_text": "Over hyped Over hyped! Other hill stations have better markets. Just a man averaging market. Nothing fancy. The good point is, it’s maintained beautifully, so good to walk down once!",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.026
+  },
+  {
+    "doc_id": "text1130",
+    "raw_text": "Over crowded walking street I returned to Gangtok after 6 years but to be disappointed this time. The MG Marg had a pleasant feeling before where you can sit for hours and enjoy the surrounding and weather. But due to the raise in traffic now there is limited area to walk around. Also previously MG Marg was to promote local sellers with unique stuffs. Now this location has completely changed to High and expensive brands.",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.0245
+  },
+  {
+    "doc_id": "text617",
+    "raw_text": "Mall Road - Nothing special Gangtok's prime street with shopping options of the regular kind we find in most of the Indian cities. Only plus points are no vehicles and no litter.",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.0244
+  },
+  {
+    "doc_id": "text305",
+    "raw_text": "Okok Place I didn't like much the place was too crowded may be becoz of Christmas the celebration was also not so good as I had heard. OK visit 1 time will be enough",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.0221
+  },
+  {
+    "doc_id": "text1301",
+    "raw_text": "Terrible for a tourist location 3 cafes, maybe 3 restaurants. That's all. Literally it. Maybe the walk, but nothing else. \n\nThe rest of the market is paint shops, grocery stores, barbers, banks, offices, travel agents. Not much you can do here as a tourist.",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.0215
+  },
+  {
+    "doc_id": "text700",
+    "raw_text": "Not worth it Go here if you want to kill time..there is nothing much to see or buy from here...usually the locals are seen shopping from here..",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.0214
+  },
+  {
+    "doc_id": "text641",
+    "raw_text": "It's just another market Nothing special except the view at the entrance. Clean and well arranged. it has shops where you can buy a true copy of branded goods like shoes, clothes etc. Restaurants are available in good numbers.",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.0195
+  },
+  {
+    "doc_id": "text1243",
+    "raw_text": "MG marg Not a great place if you actually want to get some stuff. If you want to buy some mementos then you may. Bargaining doesn't really work because if you don't then there are others who will buy irrespective of the prices.",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.0179
+  },
+  {
+    "doc_id": "text568",
+    "raw_text": "A lame with triple capacity crowd We were there yesterday and found this place over loaded , not a great scenic place . Taxi drivers bargain and restaurant has minimum 30 minutes waiting for dinner .",
+    "Topic_Identified": "Topic_12",
+    "Topic_12": 0.0162
+  },
+  {
+    "doc_id": "text929",
+    "raw_text": "Difficulties in Gangtok Unfortunately we were taken for a ride by every taxi driver we came across. They were booked and promised but as it turns out in a disorganised system with chaos and opportunism ruling, the cab drivers never showed up. This resulted in us wasting an hour each trip. \nSecond problem is this place is ONLY  meant for healthy fit people who can climb stairs for 3 stories. Cabs are not allowed to stop or drop off passengers anywhere on MG Marg. To take a cab, you need to walk up 3 flights of stairs. So, forbidden if you have a senior citizen as part of your group.",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.9607
+  },
+  {
+    "doc_id": "text723",
+    "raw_text": "Shade of Past Gangtok Mall (M G Marg) is one of the major attraction of Gangtok. You may feel you are in a foreign country at Gangtok mall. It is so clean, cozy with numbers of shops, bars, pubes etc. Currently Sikkim Govt. banned the liquor sell openly, thus M G Marg lost its essence & converted into a business place instead",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.909
+  },
+  {
+    "doc_id": "text224",
+    "raw_text": "Small walkway converted into a walking plaza You will be disappointed if you have a hugh expectations. A handful of shops put togethet and a few benches to sit upon. Wish the authorities here make effort to set up some local performance or concerts to make it a happening place",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.8942
+  },
+  {
+    "doc_id": "text1130",
+    "raw_text": "Over crowded walking street I returned to Gangtok after 6 years but to be disappointed this time. The MG Marg had a pleasant feeling before where you can sit for hours and enjoy the surrounding and weather. But due to the raise in traffic now there is limited area to walk around. Also previously MG Marg was to promote local sellers with unique stuffs. Now this location has completely changed to High and expensive brands.",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.0926
+  },
+  {
+    "doc_id": "text546",
+    "raw_text": "Nothing great except cleanliness Hyped place. There are local shop n restaurant, but nothing great about this . No natural view and the area is just covered with hotels and shops...It's more like a conjusted Market place. Too rush in the evening, people all over the place.",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.0298
+  },
+  {
+    "doc_id": "text991",
+    "raw_text": "Over rated area M G Marg which is primarily a walking street for tourists with shopping & eating places located on it. But some basic requirements of a hill stations are missing . Their are no hawkers serving hot chana ,pakora,popcorn etc on streets .",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.0264
+  },
+  {
+    "doc_id": "text908",
+    "raw_text": "Just like any other market During free time you can take a walk down the street, i did't felt worth buying any thing from the market.",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.0251
+  },
+  {
+    "doc_id": "text739",
+    "raw_text": "Too crowded for my liking.... The mall area of Gangtok, the heart of the city. Frankly, I liked the ones in Darjeeling and Manali way more than this one. This actually looked more like an ordinary market place at the peak of business hours. The only plus point - the adorable dogs I came across on the pavement.",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.0224
+  },
+  {
+    "doc_id": "text344",
+    "raw_text": "Very Costly Please avoid buying anything from MD Marg. Things are very costly thought the market is very clean and good looking. Better to walk down through the stairs from MG Marg and buy from Lal Market.",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.0165
+  },
+  {
+    "doc_id": "text567",
+    "raw_text": "For shopping or Dinner yoiu can go MG Marg, we visited 2 days there for Dinner but after 9pm no Hotel gives entry. If going for shopping or Dinner must go by 7pm and by 8pm have dinner and then do what you like. Normally in peak season there is rush and difficult to get food.",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.0129
+  },
+  {
+    "doc_id": "text1301",
+    "raw_text": "Terrible for a tourist location 3 cafes, maybe 3 restaurants. That's all. Literally it. Maybe the walk, but nothing else. \n\nThe rest of the market is paint shops, grocery stores, barbers, banks, offices, travel agents. Not much you can do here as a tourist.",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.0121
+  },
+  {
+    "doc_id": "text1177",
+    "raw_text": "MG Marg had heard so much about it. But was disappointed. The legendary clean image with dividers full of blooming plants were no where to be seen. Sadly it has fallen victim to over popularity and the city authorities are unable to cope with the tourist i flows who litter everywhere despite threat of penalty.",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.012
+  },
+  {
+    "doc_id": "text617",
+    "raw_text": "Mall Road - Nothing special Gangtok's prime street with shopping options of the regular kind we find in most of the Indian cities. Only plus points are no vehicles and no litter.",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.011
+  },
+  {
+    "doc_id": "text1137",
+    "raw_text": "Slightly overrated Though it’s a beautiful road very well maintained nice clean beautiful you will love everything about the marg. Drawback is the market closes around 8pm which for us was too soon. Don’t have any activity to do like games shows anything. Shopping also not anything great. Have few restaurants which r good but not many options best we liked was OSM. Amazing food and service",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.0109
+  },
+  {
+    "doc_id": "text907",
+    "raw_text": "Only main shopping area This is the only major shopping area, it is worth walking on the street, except local liquor, we should not buy anything here, there is no specific items to buy here.",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.0109
+  },
+  {
+    "doc_id": "text636",
+    "raw_text": "Why is this place famous? I didn't find this place as famous as people used to say. A little over-hyped with some good places to eat but very crowded.",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.0102
+  },
+  {
+    "doc_id": "text134",
+    "raw_text": "Something that Tourist Considers So far, it is the only place for city lovers to hangout. Due to the peak season, it was over crowded. I tried some shopping but was expensive through.",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.0099
+  },
+  {
+    "doc_id": "text795",
+    "raw_text": "Nothing much to offer It is like any other shopping areas with big brands. the only good thing is the walk on MG road, if you are there for shopping for local stuff it doesn't have much to offer. the food is bad",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.0098
+  },
+  {
+    "doc_id": "text568",
+    "raw_text": "A lame with triple capacity crowd We were there yesterday and found this place over loaded , not a great scenic place . Taxi drivers bargain and restaurant has minimum 30 minutes waiting for dinner .",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.0097
+  },
+  {
+    "doc_id": "text305",
+    "raw_text": "Okok Place I didn't like much the place was too crowded may be becoz of Christmas the celebration was also not so good as I had heard. OK visit 1 time will be enough",
+    "Topic_Identified": "Topic_10",
+    "Topic_10": 0.0093
+  }
+]
